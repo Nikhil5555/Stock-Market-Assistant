@@ -1,0 +1,10 @@
+pandas_datareader
+tracemalloc
+streamlit
+pandas
+numpy
+matplotlib
+datetime
+tensorflow
+sklearn
+dateutil
