@@ -74,7 +74,7 @@ if page == 'Analysis':
         st.markdown(warning, unsafe_allow_html=True)
 else:
     try:
-        stock_ticker = st.sidebar.selectbox('Select Stock Ticker:', options=['', 'AAPL', 'RS', 'BAJAJ-AUTO.NS', 'ADANIPORTS.NS', 'SBIN.NS', 'BHARATIARTL.NS'] )
+        stock_ticker = st.sidebar.selectbox('Select Stock Ticker:', options=['', 'AAPL', 'RS', 'BAJAJ-AUTO.NS', 'ADANIPORTS.NS', 'SBIN.NS', 'BHARTIARTL.NS'] )
         start =  (date.today() - relativedelta(years = 1)).strftime("%Y-%m-%d")
         end = date.today().strftime("%Y-%m-%d")
         n = st.sidebar.number_input('Enter no. of days of prediction:', step=1)
