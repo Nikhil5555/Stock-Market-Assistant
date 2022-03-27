@@ -1,5 +1,4 @@
 pandas_datareader
-tracemalloc==3.4
 streamlit
 pandas
 numpy
