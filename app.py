@@ -1,3 +1,4 @@
+import datetime
 from tracemalloc import start
 import streamlit as st
 import pandas as pd
@@ -25,10 +26,14 @@ page = st.sidebar.radio('Explore:',page_names)
 if page == 'Analysis':
     try:
         stock_ticker = st.sidebar.text_input('Enter Stock Ticker:')
-        start = st.sidebar.text_input('Start Date:')
-        end = st.sidebar.text_input('End Date:')
+        maxx_value=datetime.date.today()
+        d = st.sidebar.date_input("Start date",datetime.date(2019, 7, 6),max_value=maxx_value)
+        e= st.sidebar.date_input("End date",max_value=maxx_value)
+       
+       # start = st.sidebar.text_input('Start Date:')
+        #end = st.sidebar.text_input('End Date:')
         
-        df = data.DataReader(stock_ticker, 'yahoo', start, end)
+        df = data.DataReader(stock_ticker, 'yahoo', d, e)
         # Describing Date
         st.subheader('Description of Stock:')
         st.write(df.describe())
@@ -136,8 +141,10 @@ else:
         st.line_chart(final)
         final_price = final[-1]
         final_price = final_price[-1]
-        final_data = 'Prediction of %s after %d days is %f.'%(stock_ticker, n, final_price)
-        st.write(final_data)
+        predicted_date=datetime.date.today() + datetime.timedelta(n)
+      
+        final_data = 'Prediction of %s till %s is %f.'%(stock_ticker,predicted_date.strftime('%Y-%m-%d'), final_price)
+        st.subheader(final_data)
     except Exception as e:
         warning = '<p style="color:Red; font-size: 30px; font-weight: bold;">Enter Details First!!</p>'
         st.markdown(warning, unsafe_allow_html=True)
