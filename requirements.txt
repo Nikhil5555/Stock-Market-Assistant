@@ -5,4 +5,5 @@ numpy
 matplotlib
 datetime
 tensorflow
-sklearn
+yfinance
+scikit-learn
