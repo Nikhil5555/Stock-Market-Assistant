@@ -15,7 +15,7 @@ scaler = MinMaxScaler(feature_range=(0,1))
 from dateutil.relativedelta import relativedelta
 import os
 path = os.getcwd()
-os.chdir("d:/new/12th Sub")
+os.chdir(".")
 
 
 # title 
