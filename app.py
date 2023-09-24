@@ -3,7 +3,9 @@ from tracemalloc import start
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pandas_datareader as data
+# import pandas_datareader as data
+from pandas_datareader import data as pdr
+import yfinance as yfin
 import matplotlib.pyplot as plt
 from datetime import date
 import tensorflow as tf
@@ -11,6 +13,9 @@ from tensorflow.keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler(feature_range=(0,1))
 from dateutil.relativedelta import relativedelta
+import os
+path = os.getcwd()
+os.chdir("d:/new/12th Sub")
 
 
 # title 
@@ -32,8 +37,12 @@ if page == 'Analysis':
        
        # start = st.sidebar.text_input('Start Date:')
         #end = st.sidebar.text_input('End Date:')
-        
-        df = data.DataReader(stock_ticker, 'yahoo', d, e)
+        yfin.pdr_override()
+
+        df = pdr.get_data_yahoo(stock_ticker, start=d, end=e)
+
+        # print(spy)
+        # df = data.DataReader(stock_ticker, 'yahoo', start = d, end = e)
         # Describing Date
         st.subheader('Description of Stock:')
         st.write(df.describe())
@@ -83,8 +92,10 @@ else:
         start =  (date.today() - relativedelta(years = 1)).strftime("%Y-%m-%d")
         end = date.today().strftime("%Y-%m-%d")
         n = st.sidebar.number_input('Enter no. of days of prediction:', step=1)
+        yfin.pdr_override()
 
-        df = data.DataReader(stock_ticker, 'yahoo', start, end)
+        df = pdr.get_data_yahoo(stock_ticker, start=start, end=end)
+        # df = pdr.DataReader(stock_ticker, 'yahoo', start, end)
 
         df = df.reset_index()
         prediction_input = df[-100:]
